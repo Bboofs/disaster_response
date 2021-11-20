@@ -1,0 +1,7 @@
+./.idea
+./.idea/
+./.idea/*
+./.ipynb_checkpoints
+./.ipynb_checkpoints/
+./.ipynb_checkpoints/*
+./models/finalized_model.pickle
