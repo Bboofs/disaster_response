@@ -27,7 +27,7 @@ The code should run with no issues using Python versions 3.*.
 
 ## Directory Structure <a name="dir_structure"></a>
 
-![Directory Structure](./graphs/dir_structure.jpg "Directory Structure")
+![Directory Structure](https://github.com/Bboofs/disaster_response/blob/main/graphs/dir_structure.jpg "Directory Structure")
 
 ## Instructions <a name="instructions"></a>
 1. Run the following commands in the project's root directory to set up your database and model.
@@ -46,38 +46,38 @@ The code should run with no issues using Python versions 3.*.
 >1. Because the training of the model takes a long time (over 1hr), the pickle file has been included to avoid training everytime
 >2. The pickle file has been zipped to be able to upload it to github. When you clone/download the repo, just unzip the pickle file
 
-#Example Working<a name="examples"></a>
+# Example Working<a name="examples"></a>
 Te Home Page shows the analysis of all categories in the training data
-![home_screen_cropped](./graphs/home_screen_cropped.png "home_screen_cropped")
+![home_screen_cropped](https://github.com/Bboofs/disaster_response/blob/main/graphs/home_screen_cropped.png "home_screen_cropped")
 
 
 This tweet https://twitter.com/GlobalFloodNews/status/1448943021576294430 has been classified into 4 catogories
-![categorised_tweet](./graphs/categorised_tweet.png "categorised_tweet")
+![categorised_tweet](https://github.com/Bboofs/disaster_response/blob/main/graphs/categorised_tweet.png "categorised_tweet")
 
 
 This tweet https://twitter.com/GraphQLGalaxy/status/1451291277958471682 is about a completely unrelated subject and returns no classification at all.
-![unrelated_msg](./graphs/unrelated_msg.png "unrelated_msg")
+![unrelated_msg](https://github.com/Bboofs/disaster_response/blob/main/graphs/unrelated_msg.png "unrelated_msg")
 
 # Analysis of the Various Categories <a name="analysis"></a>
 ## Less than one option categories
- ### Child Alone
+### Child Alone
 All values of messages did not have any <i>child_alone</i> category (all were 0). This implies no tweet will ever have 
 a prediction of 1.
-![child_alone](./graphs/child_alone.png "child_alone")
+![child_alone](https://github.com/Bboofs/disaster_response/blob/main/graphs/child_alone.png "child_alone")
 Deleting this category from the model may not have impact on the outcome of predictions
 
-##More than two option categories
-###Related
+## More than two option categories
+### Related
 The <i>related</i> category have 0, 1 & 2 options, with the 2 consisting of less than 1%.
 
-![related](./graphs/related.png "child_alone")
+![related](https://github.com/Bboofs/disaster_response/blob/main/graphs/related.png "child_alone")
 
-##Imbalanced Categories
+## Imbalanced Categories
 Majority of the categories had imbalanced classifications
 
-###Aid Centers
+### Aid Centers
 This had only two classifications, 0 and 1, but were so imbalanced with 1 only accounting for 1.2% of all messages.
-![aid_centers](./graphs/aid_centers.png "aid_centers") 
+![aid_centers](https://github.com/Bboofs/disaster_response/blob/main/graphs/aid_centers.png "aid_centers") 
 
 Other categories with this imbalanced message categorizations were:
 - buildings with 1 at 5.1%
@@ -88,12 +88,12 @@ Other categories with this imbalanced message categorizations were:
 - elecricity with 1 at 2%
 - etc
 
-##Balanced Categories
+## Balanced Categories
 These had a relative closeness in the message categorizations with neither 0 nor 1 taking up less than 30% f the total message classifications
-###Aid Related
+### Aid Related
 Had a good message classification with 1 at 42% of the messages
-![aid_related](./graphs/aid_related.png "aid_related")
+![aid_related](https://github.com/Bboofs/disaster_response/blob/main/graphs/aid_related.png "aid_related")
 
-##About Me <a name="about"></a>
+## About Me <a name="about"></a>
 - <a href="https://www.linkedin.com/in/mcoluga/">LinkedIn</a>
 - <a href="https://twitter.com/McOluga">Twiiter</a>
