@@ -46,10 +46,10 @@ def clean_data(df):
         
     # drop the original categories column from `df`
     df.drop(columns=['categories'], inplace=True)
-    
+
     # concatenate the original dataframe with the new `categories` dataframe
     df = df.merge(categories, left_index=True, right_index=True)
-    
+
     # check number of duplicates
     print('Number of duplicates: ' + str(df[df.duplicated()].shape))
 

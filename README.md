@@ -19,7 +19,8 @@
 4. [Example Working](#examples)
 5. [Analysis of the Various Categories](#analysis)
 
-6. [About Me](#about)
+6. [Sample Confusion Matrix, Precision, Recall, Accuracy, and F1 Score](#cmatrix)
+7. [About Me](#about)
 
 ## Installation <a name="installation"></a>
 
@@ -90,9 +91,32 @@ Other categories with this imbalanced message categorizations were:
 
 ## Balanced Categories
 These had a relative closeness in the message categorizations with neither 0 nor 1 taking up less than 30% f the total message classifications
+
 ### Aid Related
 Had a good message classification with 1 at 42% of the messages
 ![aid_related](https://github.com/Bboofs/disaster_response/blob/main/graphs/aid_related.png "aid_related")
+
+## Sample Confusion Matrix, Precision, Recall, Accuracy, and F1 Score <a name="cmatrix"></a>
+### Related
+![matrix related](https://github.com/Bboofs/disaster_response/blob/main/graphs/matrix_related.png "related")
+- Precision: 0.821
+- Recall: 0.935
+- Accuracy: 0.796
+- F1 Score: 0.875
+
+### Request
+![matrix request](https://github.com/Bboofs/disaster_response/blob/main/graphs/matrix_request.png "request")
+- Precision: 0.755
+- Recall: 0.514
+- Accuracy: 0.894
+- F1 Score: 0.612
+
+### Water
+![matrix water](https://github.com/Bboofs/disaster_response/blob/main/graphs/matrix_water.png "water")
+- Precision: 0.460
+- Recall: 0.298
+- Accuracy: 0.932
+- F1 Score: 0.362
 
 ## About Me <a name="about"></a>
 - <a href="https://www.linkedin.com/in/mcoluga/">LinkedIn</a>

@@ -1,13 +1,20 @@
 # import libraries
 import re
 import sys
-import time
 import pickle
 import pandas as pd
+import random
+import matplotlib.pyplot as plt
+
 from datetime import datetime
 from nltk.stem import WordNetLemmatizer
 from sqlalchemy import create_engine
 from nltk.tokenize import word_tokenize
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import f1_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
 from sklearn.pipeline import Pipeline
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.multioutput import MultiOutputClassifier
@@ -30,6 +37,25 @@ def load_data(database_filepath):
               'tools', 'hospitals', 'shops', 'aid_centers', 'other_infrastructure',
               'weather_related', 'floods', 'storm', 'fire', 'earthquake', 'cold',
               'other_weather', 'direct_report']
+
+    print("Loaded data {} rows by {} columns.".format(df.shape[0], df.shape[1]))
+    print('*' * 65)
+    print('{0:25}{1:>20}{2:>20}'.format('COLUMN', 'TOTAL NO. OF NULLS', 'NULLS (%)'))
+
+    for col in df.isnull().sum().keys():
+        print('{0:25}{1:>20}{2:>20.2f}'.format(col, df.isnull().sum()[col], df.isnull().sum()[col] * 100 / df.shape[0]))
+
+    df.drop(df[df['related'] == 2].index, inplace=True)
+    df.drop(columns=['original'], inplace=True)
+
+    print('*' * 65)
+    print("Only the 'original' column has nulls, but it's not used. It's safe to delete.")
+
+    print('*' * 65)
+    print("Dropping {} 'related' rows with values as 2.".format(df[df['related'] == 2].shape[0]))
+
+    print('*' * 65)
+    print("Loaded data now has {} rows by {} columns.".format(df.shape[0], df.shape[1]))
 
     X = df['message']
     y = df[y_cols]
@@ -72,8 +98,35 @@ def build_model():
 
 def evaluate_model(model, X_test, y_test, category_names):
     y_pred = model.predict(X_test)
-    accuracy = (y_pred == y_test).mean()
-    print("Accuracy:", accuracy)
+    # accuracy = (y_pred == y_test).mean()
+    # print("Accuracy:", accuracy)
+    y_pred_df = pd.DataFrame(y_pred, columns=category_names)
+    print('Confusion Matrix, Precision, Recall, Accuracy, and F1 Score')
+
+    for col in category_names:
+        n = random.randint(0, len(plt.colormaps()))
+        colour_map = plt.colormaps()[n]
+        conf_matrix = confusion_matrix(y_true=y_test[col], y_pred=y_pred_df[col])
+        fig, ax = plt.subplots(figsize=(6, 6))
+        ax.matshow(conf_matrix, cmap=colour_map)
+        for i in range(conf_matrix.shape[0]):
+            for j in range(conf_matrix.shape[1]):
+                ax.text(x=j, y=i, s=conf_matrix[i, j], va='center', ha='center', size='xx-large')
+
+        plt.xlabel('Predicted Values', fontsize=16)
+        plt.ylabel('Actual Values', fontsize=16)
+        plt.title('Confusion Matrix: ' + col.replace('_', ' ').title(), fontsize=16)
+        try:
+            plot_name = '../graphs/matrix_' + col + '.png'
+            plt.savefig(plot_name)
+        except Exception as e:
+            print(str(e))
+        plt.draw()
+        print('Precision: %.3f' % precision_score(y_test[col], y_pred_df[col]))
+        print('Recall: %.3f' % recall_score(y_test[col], y_pred_df[col]))
+        print('Accuracy: %.3f' % accuracy_score(y_test[col], y_pred_df[col]))
+        print('F1 Score: %.3f' % f1_score(y_test[col], y_pred_df[col]))
+    plt.show()
 
 
 def save_model(model, model_filepath):
